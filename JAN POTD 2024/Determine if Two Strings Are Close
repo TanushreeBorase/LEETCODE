@@ -1,0 +1,149 @@
+class Solution {
+    public boolean closeStrings(String word1, String word2) {
+        int n = word1.length();
+        int m = word2.length();
+        System.out.println(n);
+        System.out.println(m);
+
+        if(n!=m){
+            return false;
+        }
+        if(word1.equals(word2)) return true;
+ 
+        Set<Character> hs1 = new HashSet<>();
+        Set<Character> hs2 = new HashSet<>();
+
+        for(int i=0;i<n;i++)
+        {
+            hs1.add(word1.charAt(i));
+        }
+
+        for(int i=0;i<m;i++)
+        {
+            hs2.add(word2.charAt(i));
+        }
+
+        if(hs1.size()!=hs2.size())
+        {
+            return false;
+        }
+
+        System.out.println(hs1);
+        System.out.println(hs2);
+
+        char ch1[] = new char[hs1.size()];
+        char ch2[] = new char[hs2.size()];
+
+        int k=0;
+        for (Character element : hs1) {
+            ch1[k]=element;
+            System.out.print(element);
+            k++;
+        }
+        System.out.println();
+        
+        int l=0;
+        for (Character element : hs2) {
+            ch2[l]=element;
+            System.out.print(element);
+            l++;
+        }
+        System.out.println();
+
+        Arrays.sort(ch1);
+        Arrays.sort(ch2);
+
+        for(int i=0;i<ch1.length;i++)
+        {
+            if(ch1[i]!=ch2[i])
+            {
+                return false;
+            }
+        }
+
+        HashMap<Character,Integer> hs3 = new HashMap<>();
+        HashMap<Character,Integer> hs4 = new HashMap<>();
+
+        for(int i=0;i<n;i++)
+        {
+            if(hs3.containsKey(word1.charAt(i)))
+            {
+                hs3.put(word1.charAt(i),hs3.get(word1.charAt(i))+1);
+            }
+            else{
+                hs3.put(word1.charAt(i),1);
+            }
+        }
+
+        System.out.println(hs3);
+
+        for(int i=0;i<m;i++)
+        {
+            if(hs4.containsKey(word2.charAt(i)))
+            {
+                hs4.put(word2.charAt(i),hs4.get(word2.charAt(i))+1);
+            }
+            else{
+                hs4.put(word2.charAt(i),1);
+            }
+        }
+
+        System.out.println(hs4);
+
+        ArrayList<Integer> arr1 = new ArrayList<>();
+        ArrayList<Integer> arr2 = new ArrayList<>();
+
+        for(Character key: hs3.keySet())
+        {
+            int value = hs3.get(key);
+            arr1.add(value);
+        }
+        for(Character key: hs4.keySet())
+        {
+            int value = hs4.get(key);
+            arr2.add(value);
+        }
+
+        Collections.sort(arr1);
+        Collections.sort(arr2);
+
+        for(int i=0;i<arr1.size();i++)
+        {
+            int temp = arr1.get(i);
+            System.out.print(temp+" ");
+        }
+        System.out.println();
+
+        for(int i=0;i<arr2.size();i++)
+        {
+            int temp = arr2.get(i);
+            System.out.print(temp+" ");
+        }
+
+
+        int p = arr1.size();
+        int o = arr2.size();
+
+        // System.out.println(p);
+        // System.out.println(o);
+
+        if(p!=o)
+        {
+            return false;
+        }
+
+        for(int i=0;i<o;i++)
+        {
+            int temp1 = arr1.get(i);
+            int temp2 = arr2.get(i);
+            if(temp1!=temp2)
+            {
+                // System.out.println(arr1.get(i));
+                // System.out.println(arr2.get(i));
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
