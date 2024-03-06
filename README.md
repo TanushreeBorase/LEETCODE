@@ -1,2 +1,2 @@
 # LEETCODE
-POTD SOLUTION 
+Practice 
